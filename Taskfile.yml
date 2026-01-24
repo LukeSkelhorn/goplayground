@@ -22,3 +22,8 @@ tasks:
     desc: Go vet
     cmds:
       - go vet ./...
+
+  run:
+    desc: Run go file
+    cmds:
+      - go run ./cmd/main.go
