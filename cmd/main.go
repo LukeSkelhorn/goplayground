@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 func main() {
 	types()
@@ -69,4 +72,71 @@ func shadowTypes() {
 		fmt.Println(x)
 	}
 	fmt.Println(x)
+}
+
+func switchSatements() {
+	// switch statement example
+	age := 28
+	switch {
+	case age < 13:
+		fmt.Println("Child")
+	case age >= 13 && age < 20:
+		fmt.Println("Teenager")
+	default:
+		fmt.Println("Adult")
+	}
+
+	switch age {
+	case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12:
+		fmt.Println("Child")
+	case 13, 14, 15, 16, 17, 18, 19:
+		fmt.Println("Teenager")
+	default:
+		fmt.Println("Adult")
+	}
+
+	// for loop with switch and break example
+loop:
+	for i := 0; i < 10; i++ {
+		switch i {
+		case 5:
+			fmt.Println("halfway there")
+		case 7:
+			fmt.Println("lucky number seven, breaking out of loop")
+			break loop
+		default:
+			fmt.Println(i)
+		}
+	}
+}
+
+func fizzBuzz() {
+	for i := 1; i <= 100; i++ {
+		switch {
+		case i%3 == 0 && i%5 == 0:
+			fmt.Println("FizzBuzz")
+		case i%3 == 0:
+			fmt.Println("fuzz")
+		case i%5 == 0:
+			fmt.Println("buzz")
+		default:
+			fmt.Println(i)
+		}
+	}
+}
+
+func gotoStatement() {
+	fmt.Println("goto statement example")
+	// Create random number
+	a := rand.Intn(10)
+	for a < 100 {
+		if a%5 == 0 {
+			goto done
+		}
+		a = a*2 + 1
+	}
+	fmt.Println("do something when the loops completes normally")
+done:
+	fmt.Println("do soemthing complex no matter why we left the loop")
+	fmt.Println(a)
 }
