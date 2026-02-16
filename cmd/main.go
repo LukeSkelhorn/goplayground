@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 )
 
 func main() {
@@ -139,4 +140,65 @@ func gotoStatement() {
 done:
 	fmt.Println("do soemthing complex no matter why we left the loop")
 	fmt.Println(a)
+}
+
+// =================================
+// Exercise: Build a simple calculator
+// =================================
+
+func add(i, j int) int { return i + j }
+
+func sub(i, j int) int { return i - j }
+
+func mul(i, j int) int { return i * j }
+
+func div(i, j int) int { return i / j }
+
+var opMap = map[string]func(int, int) int{
+	"+": add,
+	"-": sub,
+	"*": mul,
+	"/": div,
+}
+
+func calculator() {
+	expressions := [][]string{
+		{"3", "+", "4"},
+		{"10", "-", "2"},
+		{"5", "*", "6"},
+		{"20", "/", "4"},
+		{"2", "%", "3"}, // Invalid operator
+		{"four", "+", "seven"}, // Invalid operands
+		{"5"}, // Invalid expression
+	}
+
+	for _, expression := range expressions {
+		if len(expression) != 3 {
+			fmt.Println("Invalid expression:", expression)
+			continue
+		}
+
+		p1, err := strconv.Atoi(expression[0])
+		if err != nil {
+			fmt.Println("Invalid operand:", expression[0])
+			continue
+		}
+
+		op := expression[1]
+		opFunc, ok := opMap[op]
+		if !ok {
+			fmt.Println("Invalid operator:", op)
+			continue
+		}
+
+		p2, err := strconv.Atoi(expression[2])
+		if err != nil {
+			fmt.Println("Invalid operand:", expression[2])
+			continue
+		}
+
+		result := opFunc(p1, p2)
+		fmt.Println(result)
+	}
+
 }
